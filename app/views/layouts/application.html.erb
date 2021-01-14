@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 
-    <title>Foodbank2</title>
+    <title>Foodbank3</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -19,17 +19,17 @@
 <br>
       <% #if logged_in? %>
       <div class="wrapper">
-      <div><a href="/">Home</a></div>
+      <%= link_to('Home', welcome_path) %><br>
       <%= link_to('Log in', login_path) %><br>
       <%= link_to('Log out', logout_path) %>
   </body><br>
 
       <footer class="branding">
-        <br><small>&copy; 2021 <strong>Foodbank2</strong></small>
+        <br><small>&copy; 2021 <strong>Foodbank3</strong></small>
       </footer>
     </div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://merriam-webster.com/assets/mw/images/article/art-wap-article-main/cornucopia-horn-of-plenty-image-1597@2x.jpg"></script>
     <!--[if lt IE 7]>
       <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
       <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>

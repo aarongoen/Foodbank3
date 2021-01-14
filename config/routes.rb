@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # Routes for Sessions
 
   get '/welcome', to: 'sessions#welcome'
-  # get '/signup', to: 'sessions#signup'
+  get '/signup', to: 'sessions#signup' 
   # post '/create', to: 'sessions#create'
   
   get '/login', to: 'sessions#new'

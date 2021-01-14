@@ -4,11 +4,11 @@ class User < ApplicationRecord
     has_one :requesters
     has_one :donors
 
-    def new
+    # def new
 
-    end
+    # end
 
-    def create
+    # def create
 
-    end
+    # end
 end
