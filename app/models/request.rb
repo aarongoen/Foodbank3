@@ -2,14 +2,14 @@ class Request < ApplicationRecord
     belongs_to :donors
     belongs_to :requesters
 
-    def new
-    end
+    # def new
+    # end
     
     # def create
     #     @request = Request.create(name: params[:name], quantity: params[:quantity])
     # end
 
-    private
+    # private
 
     # def valid?
 
