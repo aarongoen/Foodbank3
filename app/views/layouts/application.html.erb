@@ -20,8 +20,8 @@
       <% #if logged_in? %>
       <div class="wrapper">
       <div><a href="/">Home</a></div>
-      <div><a href="/sessions/login">Log In</a></div>
-      <div><a href="/logout">Log Out</a></div>
+      <%= link_to('Log in', login_path) %><br>
+      <%= link_to('Log out', logout_path) %>
   </body><br>
 
       <footer class="branding">

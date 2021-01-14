@@ -1,0 +1,10 @@
+<h1>Create your account by filling out the form below.</h1>
+
+
+<%= form_for @user, url: "/create" do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %><br>
+<%= f.label :password %>
+<%= f.password_field :password %><br>
+<%= f.submit :submit %>
+<% end %>
