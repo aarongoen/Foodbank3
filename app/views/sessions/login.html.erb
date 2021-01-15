@@ -1,6 +1,6 @@
 <h1>Log in with your name and password below.</h1>
 
-
+<% @error  %>
 <%= form_for(@user, url: '/login') do |f| %>
 Name: <%= f.text_field :name %><br>
 Password: <%= f.password_field :password %><br>

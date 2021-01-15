@@ -7,6 +7,7 @@ class RequestsController < ApplicationController
     end
     
     def index
+        @user_requests = current_user.request.all
     end
     
     def create
@@ -20,7 +21,7 @@ class RequestsController < ApplicationController
     end
 
     def request_params
-        Requests.require(:quantity, :measurement)
+        params.require(:quantity)
     end
     
 end

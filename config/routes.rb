@@ -4,18 +4,23 @@ Rails.application.routes.draw do
   # Routes for Sessions
 
   get '/welcome', to: 'sessions#welcome'
-  get '/signup', to: 'sessions#signup' 
-  # post '/create', to: 'sessions#create'
+  post '/create', to: 'sessions#create'
   
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#logout'
+
+  # Routes for Users
+
+  get '/signup', to: 'users#new' 
+  post 'signup', to: 'users#create'
+
 
   # post '/logout', to: 'sessions#logout'
     
   resources :donors
   resources :requests
   resources :requesters
-  resources :users
+  resources :users, only: [:new, :create, :show]
 
 end
