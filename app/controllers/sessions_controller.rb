@@ -9,8 +9,9 @@ class SessionsController < ApplicationController
 # post request - params are 
     def create
         @user = User.find_by(name: params[:name])
-        # binding.pry
+        binding.pry
         if @user && @user.authenticate(params[:password])
+            # binding.pry
             session[:user_id] = @user.id
             redirect_to @user
         else

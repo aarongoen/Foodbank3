@@ -1,13 +1,14 @@
 class RequestsController < ApplicationController
-    before_action :require_login
-    skip_before_action :require_login, only: [:index]
+    # before_action :require_login
+    # skip_before_action :require_login, only: [:index]
   
     def show
         @request = Request.find(params[:id])
     end
     
     def index
-        @user_requests = current_user.request.all
+        binding.pry
+        @requests = current_requester.requests
     end
     
     def create

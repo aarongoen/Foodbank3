@@ -1,0 +1,7 @@
+<p><%= form_for(@requester, url: '/requesters') do |f|%>
+    <%= f.label :requester %><br />
+    <%= f.select :requester, Requester.find_by(:name).collect {|r|
+      [r.name, r.id]} %>
+      <% end %>
+
+  </p>
