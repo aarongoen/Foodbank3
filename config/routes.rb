@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new' 
   post '/signup', to: 'users#create'
 
-  post '/auth/:provider/callback', to: 'sessions#create'    
+  match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]   
 
 
 end
