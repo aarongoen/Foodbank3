@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 # get request - params are 
-    def new
+    def login
         # binding.pry
         @user = User.new
         render :login
@@ -8,21 +8,22 @@ class SessionsController < ApplicationController
 
 # post request - params are 
     def create
-        @user = User.find_by(name: params[:name])
-        binding.pry
-        if @user && @user.authenticate(params[:password])
+        @user = User.find_by(name: params[:user][:name])
+        # binding.pry
+        if @user && @user.authenticate(strong_params[:password])
             # binding.pry
             session[:user_id] = @user.id
-            redirect_to @user
+            redirect_to @user #or root path?
         else
-            @error = "didn't work"
-            redirect_to login_path
+            flash[:error] = "@user.errors.full_messages"
+            @user = User.new(name: strong_params[:name])
+            render :signup
         end
     end
 
     def logout
         session.clear
-        redirect_to login_path
+        redirect_to root_path
     end
 
 end

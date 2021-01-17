@@ -1,26 +1,34 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  resources :donors, only: [] do
+    resources :requests
+  end
+  
+  resources :requests
+  
+  resources :requesters, only: [] do
+    resources :requests
+  end
+  
+  resources :users
+
   # Routes for Sessions
 
-  get '/welcome', to: 'sessions#welcome'
+  root 'sessions#welcome'
   post '/create', to: 'sessions#create'
   
-  get '/login', to: 'sessions#new'
+  get '/login', to: 'sessions#login'
   post '/login', to: 'sessions#create'
+  
   delete '/logout', to: 'sessions#logout'
 
   # Routes for Users
 
   get '/signup', to: 'users#new' 
-  post 'signup', to: 'users#create'
+  post '/signup', to: 'users#create'
 
+  post '/auth/:provider/callback', to: 'sessions#create'    
 
-  # post '/logout', to: 'sessions#logout'
-    
-  resources :donors
-  resources :requests
-  resources :requesters
-  resources :users, only: [:new, :create, :show]
 
 end

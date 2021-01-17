@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-# helper_method []:logged_in?, :current_user, :current_requester]
-
+helper_method [:logged_in?, :current_user, :current_requester, :current_donor]
+  # before_action :require_login
+  # skip_before_action :require_login, only: [:index]
 private
 
   def current_user
@@ -20,6 +21,11 @@ private
     end
 
     def logged_in?
-        !!session[:id]
+        !!current_donor
     end
+
+    # def require_login
+    #   return head(:forbidden) unless session.include? :user_id
+    # end
+
 end
