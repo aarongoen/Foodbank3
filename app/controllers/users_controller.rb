@@ -7,7 +7,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         # binding.pry
         if @user.valid?
-            # binding.pry
+            binding.pry
             @user.save
             # binding.pry
              if @user.role == "donor"

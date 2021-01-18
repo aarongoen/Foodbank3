@@ -1,3 +1,5 @@
+<h2>Hello, <%= @user.name%>! </h2><br>
+Here are your requests:
 <% @user_requests.each do |r|%>
-    <%= link_to r.request_name, request_path(r) %>
+    <%= link_to r.name, request_path(r) %>
 <% end %>

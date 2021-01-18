@@ -1,17 +1,15 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  resources :donors, only: [] do
+  resources :donors do
     resources :requests
   end
   
   resources :requests
   
-  resources :requesters, only: [] do
+  resources :requesters do
     resources :requests
   end
-  
-  resources :users
 
   # Routes for Sessions
 
@@ -21,11 +19,11 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#login'
   post '/login', to: 'sessions#create'
   
-  delete '/logout', to: 'sessions#logout'
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
 
   # Routes for Users
 
-  get '/signup', to: 'users#new' 
+  get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
 
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]   

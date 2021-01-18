@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  
+  before_action :authentication_required 
   
     def show
         @request = Request.find(params[:id])
