@@ -10,16 +10,17 @@ class UsersController < ApplicationController
             binding.pry
             @user.save
             # binding.pry
+            session[:user_id] = @user.id
              if @user.role == "donor"
                 @donor = Donor.create(name: @user.name, user_id: @user.id)
                 # binding.pry
-                redirect_to requests_path
+                redirect_to requests_path(@donor)
              elsif @user.role == "requester"
                 @requester = Requester.create(name: @user.name, user_id: @user.id)
-                redirect_to requests_path
+                redirect_to requests_path(@requester)
              end
         else 
-            redirect_to signup_path
+           render :login
         end
     end
 

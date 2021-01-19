@@ -1,5 +1,12 @@
-<h2>Hello, <%= @user.name%>! </h2><br>
-Here are your requests:
-<% @user_requests.each do |r|%>
-    <%= link_to r.name, request_path(r) %>
+<h2>Hello, 
+    <% if @user %>
+        <%= @user.name %>
+    <% elsif current_donor %>
+        <%= current_donor.name %> 
+    <% else %>
+        <%= current_requester.name %>! </h2><br>
+    <% end %>
+<h3>Here are your requests:</h3>
+<% @requests.each do |r|%>
+    <%= link_to r.name, request_path(r) %><br>
 <% end %>

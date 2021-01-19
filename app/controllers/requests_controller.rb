@@ -7,17 +7,24 @@ class RequestsController < ApplicationController
     
     def index
         # binding.pry
-        @requests = current_requester.requests
+        if params[:donor_id]
+            @requests = Donor.find(params[:donor_id]).requests
+        elsif params[:requester_id]
+            @requests = Requester.find(params[:requester_id]).requests
+        else
+            @requests = Request.all
+        end
     end
     
     def create
         @request = Request.create(request_params)
+        @request.save
     end
     
     private
 
     def request_params
-        params.require(:quantity)
+        params.require(:request).permit(:name, :quantity, :measurement)
     end
     
 end

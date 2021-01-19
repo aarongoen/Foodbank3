@@ -8,38 +8,38 @@ class SessionsController < ApplicationController
 
 # post request - params are 
     def create
-        binding.pry
-        user_params = params.require(:user).permit(:name, :password, :role)
-if
+        # binding.pry
+
         # if auth_hash != nil
         #     @user = User.find_or_create_from_auth_hash(auth_hash)
         #     session[:user_id] = @user.id
         #     redirect_to sessions_path(@user)
-        # elsif
-            @user = User.find_by(name: user_params[:name])
-            if @user && @user.authenticate(user_params[:password])
-            binding.pry
+        @user = User.find_by(name: params[:name])
+            # user_params = params.require(:user).permit(:name, :password, :role)
+            # binding.pry
+        if @user && @user.authenticate(params[:password])
+            # binding.pry
             session[:user_id] = @user.id
-            redirect_to requester_requests_path(@user.id)
-
-            binding.pry
+            redirect_to requests_path(@user)
+            # binding.pry
         else
-            flash[:alert] = "Invalid name or password" #"@user.errors.full_messages"
+            flash[:alert] =  "Invalid name or password" #@user.errors.full_messages 
             render :login
         end
     end
 
-    def destroy
-        session.delete(:current_user_id)
-        current_user = nil
-        redirect_to root_url, notice: "Logged out"
+    def logout
+        session.clear
+        # current_user = nil
+        # binding.pry
+        redirect_to root_path 
     end
 
     private
 
-    def user_params
-        params.require(:user).permit(:name, :password, :role)
-    end
+    # def user_params
+    #     params.require(:user).permit(:name, :password, :role)
+    # end
 
     def auth_hash
         request.env['omniauth.auth']

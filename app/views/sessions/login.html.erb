@@ -4,8 +4,8 @@
 
 <h1>Log in</h1>
 
-<%= form_tag sessions_path do %>
-Name: <%= text_field_tag :name, '', :placeholder => "name" %><br>
-Password: <%= password_field_tag :password, '', :placeholder => "password" %><br>
+<%= form_tag('/login') do %>
+Name: <%= text_field_tag :name %><br>
+Password: <%= password_field_tag :password%><br>
 <%= submit_tag "Log in" %>
 <% end %>
