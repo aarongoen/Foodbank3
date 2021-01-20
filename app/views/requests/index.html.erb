@@ -1,12 +1,12 @@
 <h2>Hello, 
-    <% if @user %>
-        <%= @user.name %>
-    <% elsif current_donor %>
-        <%= current_donor.name %> 
-    <% else %>
-        <%= current_requester.name %>! </h2><br>
-    <% end %>
+    <% if current_user %>
+        <%= current_user.name %>
+        <% else %>
+        blah
+        <% end %>
+<% #binding.pry %>
 <h3>Here are your requests:</h3>
-<% @requests.each do |r|%>
-    <%= link_to r.name, request_path(r) %><br>
+<% current_requester.requests.each do |r|%>
+    <ul><strong><%= r.name %></strong>: <%= r.quantity %> <%= r.measurement %> <%= r.fulfilled %></ul>
 <% end %>
+<% link_to '/requests/new' "Make new request" %>

@@ -7,20 +7,19 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         # binding.pry
         if @user.valid?
-            binding.pry
+            # binding.pry
             @user.save
             # binding.pry
             session[:user_id] = @user.id
-             if @user.role == "donor"
-                @donor = Donor.create(name: @user.name, user_id: @user.id)
+             if @current_donor
                 # binding.pry
-                redirect_to requests_path(@donor)
-             elsif @user.role == "requester"
-                @requester = Requester.create(name: @user.name, user_id: @user.id)
-                redirect_to requests_path(@requester)
+                redirect_to requests_path(@current_donor)
+             elsif @current_requester
+                # @requester = Requester.create(name: @user.name, user_id: @user.id)
+                redirect_to requests_path(@current_requester)
              end
         else 
-           render :login
+           render :'sessions/login'
         end
     end
 

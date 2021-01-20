@@ -6,7 +6,7 @@ helper_method [:logged_in?, :current_user, :current_requester, :current_donor]
 private
 
   def current_user
-    @current_user ||=User.find_by(id: session[:user_id]) if session[:user_id]
+    current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
   def authentication_required
@@ -20,11 +20,11 @@ private
 #   end
 
   def current_requester
-    @current_requester ||= Requester.find_by(user_id: session[:user_id])
+    current_requester = Requester.find_by(user_id: session[:user_id])
   end
 
   def current_donor
-    @current_donor ||= Donor.find_by(user_id: session[:user_id])
+    current_donor = Donor.find_by(user_id: session[:user_id])
   end
 
   def logged_in?

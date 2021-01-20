@@ -1,7 +1,12 @@
 <h3>What food requests would you like to make?</h3>
 
-<%= form_for(@request) do |r| %>%
+<%= form_for @request do |r| %>
+<%= r.label :name %>
 <%= r.text_field :name%>
+<%= r.label :quantity%>
 <%= r.number_field :quantity%>
+<%= r.label :measurement%>
+<%= r.text_field :measurement%>
+<%= r.hidden_field :requester_id, value: current_requester.id %>
 <%= r.submit %>
 <% end %>

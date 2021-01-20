@@ -1,0 +1,14 @@
+Show the requester and their requests
+
+<h2>Hello, 
+    <% if current_user %>
+        <%= current_user.name %>
+        <% else %>
+        blah
+        <% end %>
+<% #binding.pry %>
+<h3>Here are your requests:</h3>
+<% current_requester.requests.each do |r|%>
+    <%= r.name%><br>
+<% end %>
+<% link_to '/requests/new' "Make new request" %>
