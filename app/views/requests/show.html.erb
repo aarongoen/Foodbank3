@@ -1,3 +1,5 @@
-<h1><%= @request.name %></h1>
-<h3><%= @request.quantity %></h3>
+<h3><%= @request.name %></h3>: <strong><%= @request.quantity %></strong>
+
+<%= link_to 'Edit', edit_requester_request_path(current_requester, @request) %>
+<%= link_to 'Back', requester_requests_path(current_requester, @request) %>
 

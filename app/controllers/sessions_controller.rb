@@ -14,18 +14,9 @@ class SessionsController < ApplicationController
         #     session[:user_id] = @user.id
         #     redirect_to sessions_path(@user)
         @user = User.find_by(name: params[:name])
-            # binding.pry
         if @user && @user.authenticate(params[:password])
-            # binding.pry
             session[:user_id] = @user.id
-            # binding.pry
-            if current_donor
-                render :requests_path
-            else current_requester
-                # binding.pry
-                render :'/requests/index'
-            end
-
+            render :'/requests/index'
         else
             flash[:alert] =  "Invalid name or password" #@user.errors.full_messages 
             render :login
@@ -34,8 +25,6 @@ class SessionsController < ApplicationController
 
     def logout
         session.clear
-        # current_user = nil
-        # binding.pry
         redirect_to root_path 
     end
 

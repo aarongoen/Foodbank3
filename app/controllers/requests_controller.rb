@@ -6,10 +6,10 @@ class RequestsController < ApplicationController
     end
 
     def create
-        @request = Request.create(request_params)
+        @request = current_requester.requests.build(request_params)
         # binding.pry
-        current_request = (current_requester.id == @request.requester_id)
-        redirect_to requests_path(current_request)
+        # current_request = (current_requester.id == @request.requester_id)
+        redirect_to requester_requests_path(current_requester, @request)
     end
         
     def show
@@ -18,6 +18,7 @@ class RequestsController < ApplicationController
     
     def index
         # binding.pry
+        
         if current_requester
             @requests = current_requester.requests
         elsif
@@ -26,6 +27,16 @@ class RequestsController < ApplicationController
         else
             redirect_to new_requests_path
         end
+    end
+
+    def edit
+        @request = Request.find(params[:id])
+    end
+
+    def update
+        @request = Request.find(params[:id])
+        @request.update(name: params[:request][:name], quantity: params[:request][:quantity], measurement: params[:request][:measurement], requester_id: params[:request][:requester_id], donor_id: params[:request][:donor_id])
+        redirect_to requester_request_path(@request)
     end
     
  

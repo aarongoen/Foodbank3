@@ -11,12 +11,12 @@ class UsersController < ApplicationController
             @user.save
             # binding.pry
             session[:user_id] = @user.id
-             if @current_donor
-                # binding.pry
-                redirect_to requests_path(@current_donor)
-             elsif @current_requester
-                # @requester = Requester.create(name: @user.name, user_id: @user.id)
-                redirect_to requests_path(@current_requester)
+             if current_donor
+                @donor = Donor.create(name: @user.name, user_id: @user.id)
+                redirect_to requests_path(current_donor)
+             else current_requester
+                @requester = Requester.create(name: @user.name, user_id: @user.id)
+                redirect_to requests_path(current_requester)
              end
         else 
            render :'sessions/login'
