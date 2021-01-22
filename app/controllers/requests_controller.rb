@@ -6,14 +6,13 @@ class RequestsController < ApplicationController
     end
 
     def create
-        @request = current_requester.requests.build(request_params)
         # binding.pry
-        # current_request = (current_requester.id == @request.requester_id)
-        redirect_to requester_requests_path(current_requester, @request)
+        @request = Request.create(request_params)
+        redirect_to requester_requests_path(current_requester)#, @request)
     end
         
     def show
-        @request = Request.find(params[:id])
+        @request = Request.find_by(id: params[:id])
     end
     
     def index
@@ -21,8 +20,7 @@ class RequestsController < ApplicationController
         
         if current_requester
             @requests = current_requester.requests
-        elsif
-            current_donor
+        elsif current_donor
             @requests = current_donor.requests
         else
             redirect_to new_requests_path
@@ -30,15 +28,26 @@ class RequestsController < ApplicationController
     end
 
     def edit
-        @request = Request.find(params[:id])
+        # binding.pry
+        @request = Request.find_by(id: params[:id])
     end
 
     def update
-        @request = Request.find(params[:id])
-        @request.update(name: params[:request][:name], quantity: params[:request][:quantity], measurement: params[:request][:measurement], requester_id: params[:request][:requester_id], donor_id: params[:request][:donor_id])
-        redirect_to requester_request_path(@request)
+        # binding.pry
+        @request = Request.find_by(id: params[:id])
+
+        if @request.update(request_params)
+            redirect_to requester_request_path(@request)
+        else
+            render 'edit'
+        end
     end
-    
+
+    def destroy
+        # binding.pry
+        @request = Request.find_by_id(params[:id]).destroy
+        redirect_to requester_requests_path
+    end
  
     private
 

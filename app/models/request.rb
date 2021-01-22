@@ -17,6 +17,8 @@ class Request < ApplicationRecord
         end
     end
 
+    
+
 #     def request_attributes=(request)
 #       self.request = Request.find_or_create_by(name: request[:name])
 #       self.request.update(request)

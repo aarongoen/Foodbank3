@@ -14,21 +14,21 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
-  <nav><%= link_to "Home", root_path %><br>
-      <% if logged_in? %>
+  <nav> <% if logged_in? %>
         <%= link_to('Log out', logout_path, method: "delete") %>
         <% else %>
-        <%= link_to('Sign Up', signup_path) %> <br>
-        <%= link_to('Log in', login_path) %><br>
+        <%= link_to('Sign Up', signup_path) %> <%= link_to('Log in', login_path) %><br>
         <%end%>
   </nav>
 
   <div>
-  <%= flash[:error] %>
-  <div>
+  
 <br>
         <%= yield %>
 <br>
+<br>
+      <div class="wrapper">
+      <%= link_to('Home', root_path) %><br>
   </body><br>
 
       <footer class="branding">

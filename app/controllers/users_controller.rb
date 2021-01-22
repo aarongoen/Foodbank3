@@ -11,10 +11,11 @@ class UsersController < ApplicationController
             @user.save
             # binding.pry
             session[:user_id] = @user.id
-             if current_donor
+            # binding.pry
+             if @user.role == "donor"
                 @donor = Donor.create(name: @user.name, user_id: @user.id)
                 redirect_to requests_path(current_donor)
-             else current_requester
+             else @user.role == "requester"
                 @requester = Requester.create(name: @user.name, user_id: @user.id)
                 redirect_to requests_path(current_requester)
              end
@@ -22,6 +23,8 @@ class UsersController < ApplicationController
            render :'sessions/login'
         end
     end
+
+
 
     def show
         @user = User.find(params[:id])

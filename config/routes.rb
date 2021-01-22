@@ -26,7 +26,11 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
 
+  # get '/auth/github', to: 'sessions#new'
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]   
+  # match 'auth/failure', to: redirect('/')
+
+
 
 
 end

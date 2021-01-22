@@ -7,6 +7,4 @@ class RequestersController < ApplicationController
         
     end
     
-    def show
-    end
 end

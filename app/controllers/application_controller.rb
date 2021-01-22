@@ -11,17 +11,15 @@ private
   end
 
   def current_requester
-    current_requester = Requester.find_by(user_id: session[:user_id])
+    current_requester ||= Requester.find_by(user_id: session[:user_id])
   end
 
   def current_donor
-    current_donor = Donor.find_by(user_id: session[:user_id])
+    current_donor ||= Donor.find_by(user_id: session[:user_id])
   end
   
   def current_person
-    if current_user
-      current_person = current_user
-    elsif current_requester
+    if current_requester
       current_person = current_requester
     elsif current_donor
       current_person = current_donor

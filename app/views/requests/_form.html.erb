@@ -1,13 +1,11 @@
 
-<%= form_with model: @request do |r| %>
-<%= r.label :name %>
-<%= r.text_field :name%>
-<%= r.label :quantity%>
-<%= r.number_field :quantity%>
-<%= r.label :measurement%>
-<%= r.text_field :measurement%>
-<%= r.hidden_field :requester_id, value: current_requester.id %>
-<%= r.hidden_field :donor_id, value: current_donor.id %>
-<%= r.submit %><br>
-<%= link_to 'Back', requester_requests_path(current_requester)%>
+<%= form_for request do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name%>
+<%= f.label :quantity%>
+<%= f.number_field :quantity%>
+<%= f.label :measurement%>
+<%= f.text_field :measurement%>
+<%= f.hidden_field :requester_id, value: current_requester.id %>
+<%= f.submit %><br>
 <% end %>

@@ -1,13 +1,3 @@
-<h3>What food requests would you like to make?</h3>
+<h3>What food request would you like to make?</h3>
 
-<%= form_with model: @request do |r| %>
-<%= r.label :name %>
-<%= r.text_field :name%>
-<%= r.label :quantity%>
-<%= r.number_field :quantity%>
-<%= r.label :measurement%>
-<%= r.text_field :measurement%>
-<%= r.hidden_field :requester_id, value: current_requester.id %>
-<%= r.submit %><br>
-<%= link_to 'Back', requester_requests_path(current_requester)%>
-<% end %>
+<%= render 'requests/form', request: Request.new %>

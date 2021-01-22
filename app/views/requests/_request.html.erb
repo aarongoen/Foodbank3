@@ -1,0 +1,9 @@
+<p><%= request.id %> | <%= link_to request.name, requester_request_path(@requester, request) %></p>
+
+<p>Edit this request</p>
+
+<%= render 'requests/form', request: request %>
+
+<p><%= link_to "Delete request", requester_request_path(@requester, request), method: :delete %></p>
+
+<hr>
