@@ -4,23 +4,15 @@ class Request < ApplicationRecord
 
     belongs_to :requester, optional: true
     # validates :requester_id, presence: true, allow_nil: true
+    scope :has_requester?, -> { where(requester_id: exists) }
+    scope :has_donor?, -> { where(donor_id: exists) }
 
-    private 
-
-    def requester_id_or_donor_id
-        if @request[:donor_id]
-            @request[:requester_id] = nil
-        elsif @request[:requester_id]
-            @request[:donor_id] = nil
-        else
-            flash[:error] = "Requires either donor or requester id."
-        end
+    def fulfilled?
+        self.fulfilled == true
     end
 
-    
+    def outstanding?
+        self.fulfilled == false
+    end
 
-#     def request_attributes=(request)
-#       self.request = Request.find_or_create_by(name: request[:name])
-#       self.request.update(request)
-#     end
 end

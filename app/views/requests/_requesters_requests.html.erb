@@ -1,0 +1,12 @@
+<%  current_requester.requests.each do |r|%>
+    <% #binding.pry%>
+<ul><strong><%= r.name %></strong>:   
+            <%= r.quantity %> 
+            <%= r.measurement.pluralize %> 
+            <% if r.fulfilled? %> 
+                    fullfilled</ol>
+            <% else %>
+                <%= link_to 'Edit', edit_requester_request_path(current_requester, r) %>
+                <%= button_to 'Delete', [current_requester, r], method: :delete, confirm: "Are you sure?" %></ul>
+    <% end %>
+<% end %>

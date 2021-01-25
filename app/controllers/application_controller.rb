@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
 helper_method [:logged_in?, :current_user, :current_requester, :current_donor, :current_person]
-  # before_action :require_login
-  # skip_before_action :require_login, only: [:welcome]
+protect_from_forgery with: :exception
+# before_action :authentication_required
+#   skip_before_action :authentication_required, only: [:welcome, :login, :signup, :create, :new]
 
 private
 
@@ -42,8 +43,8 @@ private
       !current_user.nil?
   end
 
-  def require_login
-    return head(:forbidden) unless session.include? :user_id
-  end
+  # def require_login
+  #   return head(:forbidden) unless session.include? :user_id
+  # end
 
 end

@@ -1,14 +1,26 @@
 class User < ApplicationRecord
-    validates :name, presence: true
-    validates :name, uniqueness: true
+  # use OmniAuth::Builder do
+  #   provider :identity, :fields => [:email]
+  # end
+  
+  validates :name, 
+      presence: { :message => "Please include a name.", on: :update},
+      uniqueness: { :message => "Username already exisits. Please select a different one."},
+      length: {in: 3..15, :message => "Username should be 3-5 characters long", :allow_blank => true}
+
+
     validates :password, presence: true
-    validates :role, presence: true
+    validates :password, length: { minimum: 6 }
+
     has_secure_password
+    
+    validates :role, presence: true
 
     has_one :requester
     has_one :donor
+    has_one :identity
 
-    # def self.find_or_create_from_auth_hash(auth_hash)
+    # def self.find_or_create_from_auth_hash(auth)
     #     @user = User.find_by(name: auth_hash.uid)
 
     #     if @user 
@@ -20,19 +32,19 @@ class User < ApplicationRecord
     #     end
     # end
 
-    def self.from_omniauth(auth)
-        find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)
+    def from_omniauth?
+      :provider && :uid
     end
 
+    # def self.from_omniauth(auth)
+    #     find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)
+    # end
     def self.create_with_omniauth(auth)
-        create! do |user|
-          user.provider = auth['provider']
-          user.uid = auth['uid']
-          if auth['info']
-             user.name = auth['info']['name'] 
-          end
-        end
+      create! do |user|
+        user.uid = auth['raw_info']['id'], 
+        user.name = auth['raw_info']['name'], 
+        user.email = auth['raw_info']['email']
       end
-
+    end
 
 end

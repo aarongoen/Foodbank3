@@ -1,27 +1,19 @@
-<h2>Hello, 
-    <% if @user %>
-        <%= @user.name %>
-    <% elsif current_donor %>
-        <%= current_donor.name %> 
-    <% else %>
-        <%= current_requester.name.capitalize %> ! </h2>
-    <% end %>
-    <% #binding.pry %>
-    <h3>Here are your requests:</h3>
-    <% #binding.pry %>
-    <% if current_requester.requests %>
-    <% #binding.pry %>
-        <%  current_requester.requests.each do |r|%>
-        <% #binding.pry%>
-        <ul><strong><%= link_to r.name, edit_requester_request_path(current_requester, r), method: :edit%></strong>: 
-        <%= r.quantity %> 
-        <%= r.measurement %> 
-        <%= r.fulfilled %>
-        <%= link_to 'Edit', edit_requester_request_path(current_requester, r), method: :edit %>
-        <%= button_to 'Delete', [current_requester, r], method: :delete, confirm: "Are you sure?" %></ul>
-        <% end %>
-    <% else %>
-        <h3> You don't have any requests yet. </h3>
-    <% end %>
+<%= render "requests/greeting" %>
+<% #binding.pry %>
+<% if current_requester %>
+    <%= render 'requests/requesters_requests' %>
 
-<%= link_to 'New Request', new_requester_request_path(current_requester.id) %>
+<% elsif current_donor %>
+    <%= render 'requests/show_donations' %>
+    <%= render 'requests/to_fulfill' %>
+    <%= render 'requests/new_donation' %>
+
+<% else %>
+    <h3> You don't have any requests yet. </h3>
+<% end %>
+
+<% if current_requester %>
+    <%= link_to 'New Request', new_requester_request_path(current_requester.id) %>
+<% else %>
+<% end %>
+
