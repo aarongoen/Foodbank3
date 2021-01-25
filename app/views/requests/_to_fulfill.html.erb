@@ -1,0 +1,15 @@
+   <h3>Here are the requesters' needs:</h3>
+    <% #binding.pry %>
+        <%  Request.all.each do |r|%>
+        <% #binding.pry%>
+        <ol><strong><%= link_to r.name, edit_request_path(r), method: :edit%></strong>: 
+        <%= r.quantity %> 
+        <%= r.measurement.pluralize %> 
+        <% if r.fulfilled? %> 
+            fullfilled</ol>
+        <% else %>
+            <%= link_to 'fulfill', edit_request_path(r), method: :edit %></ol>
+        <% end %>
+    <% end %>
+
+

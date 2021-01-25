@@ -1,15 +1,19 @@
-<h3>What food request would you like to make?</h3>
+<h1>Edit your request here:</h1>
+
+<%# <%= render 'requests/form', request: @request %> 
 
 <%= form_for @request do |f| %>
-
 <%= f.label :name %>
 <%= f.text_field :name%>
 <%= f.label :quantity%>
 <%= f.number_field :quantity%>
 <%= f.label :measurement%>
 <%= f.text_field :measurement%>
-<%= f.hidden_field :requester_id, :value => current_requester.id %>
+<%= f.hidden_field :requester_id, value: current_person.id %>
 <%= f.submit %><br>
 <% end %>
+
+
+
 
 

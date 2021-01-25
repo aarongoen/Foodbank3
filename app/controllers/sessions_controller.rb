@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
+    # skip_before_action :authentication_required
 
-# get request - params are 
     def login
         # binding.pry
         @user = User.new
@@ -8,58 +8,59 @@ class SessionsController < ApplicationController
     end
 
     def new
-        @user = User.new
+
     end
 
+    def omni_create 
+        # binding.pry
+        @user = User.find_or_create_by.(provider: auth['provider'], uid: auth['uid']) do |user| 
+            user.provider = auth['provider']
+            user.uid = auth['uid']
+        end
+            if @user.save
+                session[:user_id] = user.id
+                redirect_to requests_path
+            else
+                redirect_to '/'
+            end
+    end
 
 # post request - params are 
     def create
-        # raise env['omniauth.auth'].to_yaml 
-        # binding.pry
         @user = User.find_by(name: params[:name])
-
-        if auth_hash != nil
-            @user = User.from_omniauth(auth_hash)
+        # binding.pry
+        if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
-            redirect_to requests_path(@user), notice: "Signed in"
-        elsif @user && @user.authenticate(params[:password])
-            session[:user_id] = @user.id
-            current_requester
-            render :'/requests/index'
+            redirect_to requests_path, notice: "Signed in"
         else
-            binding.pry
-            flash[:error] =  @user.errors.full_messages 
+            # binding.pry
+            flash[:alert] =  "Login unsuccessful. Try again."
             render :login
         end
     end
 
     def logout
         session.clear
-        redirect_to root_path 
+        redirect_to root_url
     end
 
     def failure
         redirect_to root_url, alert: "Authentication failed, please try again."
     end
 
-    private
-
     # def user_params
     #     params.require(:user).permit(:name, :password, :role)
     # end
 
-    def auth_hash
-        # binding.pry
-        request.env['omniauth.auth']
-    end
-
-    # def self.github_omniauth(auth)
-    #     self.find_or_create_by(name: auth[:info][:name]) do |user|
-    #         user.name = auth[:info][:nickname]
-    #     end
+    # def from_omniauth?
+    #     :provider && :uid
     # end
 
-    def from_omniauth?
-        :provider && :uid
+    protected 
+
+    def auth
+        request.env["omniauth.auth"]
     end
+
+   
 end

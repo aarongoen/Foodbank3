@@ -1,0 +1,16 @@
+<h3>What would you like to donate?</h3>
+
+<%= form_for :request do |f| %>
+
+<%= f.label :Item %>
+<%= f.text_field :name%>
+<%= f.label :quantity%>
+<%= f.number_field :quantity%>
+<%= f.label :measurement%>
+<%= f.text_field :measurement%>
+<%= f.hidden_field :donor_id, :value => current_person.id %>
+<%= f.hidden_field :fulfilled, :value => true %>
+<%= f.submit %><br>
+<% end %>
+
+

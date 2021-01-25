@@ -1,6 +1,10 @@
-<!--<h1>Create your account by filling out the form below.</h1>
+<% if flash[:message] %>
+    <%= flash[:message] %>
+<% end %>
 
-<% binding.pry %>
+<h1>Create your account by filling out the form below.</h1>
+
+<%# binding.pry %>
 <%= form_for @user, url: "/signup" do |f| %>
 <%= f.label :name %>
 <%= f.text_field :name %><br>

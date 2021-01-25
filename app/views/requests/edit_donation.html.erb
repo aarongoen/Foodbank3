@@ -1,3 +1,6 @@
+<h1>Edit your donation here:</h1>
+
+<%# <%= render 'requests/form', request: @request %> 
 
 <%= form_for @request do |f| %>
 <%= f.label :name %>
@@ -6,8 +9,14 @@
 <%= f.number_field :quantity%>
 <%= f.label :measurement%>
 <%= f.text_field :measurement%>
+<%= f.label(:fulfilled, "fulfill this request") %>
+<%= f.check_box(:fulfilled) %>
 <%= f.hidden_field :donor_id, value: current_person.id %>
+
 <%= f.submit %><br>
 <% end %>
+
+
+
 
 
