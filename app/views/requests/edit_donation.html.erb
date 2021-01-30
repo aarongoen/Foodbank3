@@ -1,19 +1,29 @@
 <h1>Edit your donation here:</h1>
+<% #binding.pry %>
+    <%# <%= render 'requests/form', request: @request %> 
+    <% if @request.requester_id %>
+    <% #binding.pry %>
+        <%= @request.name %>:
+        <%= @request.measurement %>
+        <%= @request.quantity %>
 
-<%# <%= render 'requests/form', request: @request %> 
 
-<%= form_for @request do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name%>
-<%= f.label :quantity%>
-<%= f.number_field :quantity%>
-<%= f.label :measurement%>
-<%= f.text_field :measurement%>
-<%= f.label(:fulfilled, "fulfill this request") %>
-<%= f.check_box(:fulfilled) %>
-<%= f.hidden_field :donor_id, value: current_person.id %>
+    <% else %>
 
-<%= f.submit %><br>
+        <%= form_for @request do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name%>
+        <%= f.label :quantity%>
+        <%= f.number_field :quantity%>
+        <%= f.label :measurement%>
+        <%= f.text_field :measurement%>
+        <%= f.label(:fulfilled, "fulfill this request") %>
+        <%= f.check_box(:fulfilled) %>
+        <%= f.hidden_field :donor_id, value: current_person.id %>
+
+        <%= f.submit %><br>
+    <% end %>
+<%= link_to 'Back', donor_requests_path(current_donor) %>
 <% end %>
 
 

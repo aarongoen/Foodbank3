@@ -1,11 +1,6 @@
 <h2>Hello, 
     <% if current_donor %>
-        <%= current_donor.name.capitalize %> 
+        <%= current_donor.name %> 
     <% else %>
-        <%= current_requester.name.capitalize %> ! </h2>
-            <% if current_requester.requests.empty? %>
-                Would you like to make a new request?
-            <% else %>
-                Here are your requests:
-            <% end %><br>
+        <%= current_requester.name %> ! </h2>
     <% end %>

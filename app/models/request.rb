@@ -8,5 +8,6 @@ class Request < ApplicationRecord
     scope :has_donor, -> { where(donor_id: exists) }
     scope :outstanding, -> { where(fulfilled: false)}
     scope :fulfilled, -> { where(fulfilled: true)}
+    
 
 end

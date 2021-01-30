@@ -3,8 +3,10 @@
 
     # Routes for Requests
 
-  get '/requests/to_fulfill', to: 'requests#to_fulfill'
-  post '/requests/fulfill', to: 'requests#update'
+  get 'requests/to_fulfill', to: 'requests#to_fulfill'
+  post 'requests/fulfill', to: 'requests#update'
+  get 'requests/show_donations', to: 'requests#index'
+  get 'requests/requester_requests', to: 'requests#index'
 
   resources :donors do
     resources :requests

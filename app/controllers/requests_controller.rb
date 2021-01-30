@@ -24,13 +24,16 @@ class RequestsController < ApplicationController
     end
     
     def index
-        # binding.pry
+        #  binding.pry
         
-        if current_requester
+        if current_requester && current_requester.requests.any?
+            # binding.pry
             @requests = current_requester.requests
-        elsif current_donor
+            render '/requests/requester_requests'
+        elsif current_donor && current_donor.requests.any?
             @donations = current_donor.requests
             @requests = Request.outstanding
+            binding.pry
         else
             redirect_to new_request_path
         end
