@@ -1,6 +1,11 @@
  Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+    # Routes for Requests
+
+  get '/requests/to_fulfill', to: 'requests#to_fulfill'
+  post '/requests/fulfill', to: 'requests#update'
+
   resources :donors do
     resources :requests
   end
@@ -34,10 +39,5 @@
   post '/signup', to: 'users#create'
   # get '/users/:id/edit', to: 'users#edit'#, as :edit_role
   post '/users/:id', to: 'users#update'
-
-  # Routes for Requests
-
-  get '/requests/to_fulfill', to: 'requests#fulfilled?'
-  # post '/requests/fulfill', to: 'requests#update'
 
 end

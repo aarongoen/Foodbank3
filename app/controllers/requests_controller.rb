@@ -63,8 +63,8 @@ class RequestsController < ApplicationController
         end
     end
 
-    def fulfilled?
-        @requests = Request.all.outstanding?
+    def to_fulfill
+        @requests = Request.outstanding
     end
 
     def destroy
