@@ -28,8 +28,8 @@ class RequestsController < ApplicationController
         
         if current_requester && current_requester.requests.any?
             # binding.pry
-            @requests = current_requester.requests
-            render '/requests/requester_requests'
+            @requests = current_requester.requests.all
+            #redirect_to requester_requests_path(current_requester.id)
         elsif current_donor && current_donor.requests.any?
             @donations = current_donor.requests
             @requests = Request.outstanding

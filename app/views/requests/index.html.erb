@@ -1,13 +1,11 @@
 <%= render "requests/greeting" %>
 <% #binding.pry %>
-<% if current_requester %>
-    <% render '/requests/requester_requests' %>
+<% #if current_requester %>
+    <% render 'requester_requests' %>
    
 
 
 
-<% else %>
-    Error: Your role is not defined. 
-    <%= render login_path %>
-<% end %>
+
+<% #end %>
 
