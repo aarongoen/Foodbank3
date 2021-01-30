@@ -31,7 +31,7 @@ class RequestsController < ApplicationController
         elsif current_donor
             @donations = current_donor.requests
         else
-            redirect_to new_requests_path
+            redirect_to new_request_path
         end
     end
 

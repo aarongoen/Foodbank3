@@ -1,0 +1,10 @@
+<h1>Select your role, <%= @user.name =%></h1>
+<% #binding.pry %>
+<%= form_for(@user, url: user_path(@user)) do |f| %>
+<%= f.label :requester =%>: <%= f.radio_button :role, 'requester' %> 
+Donor: <%= f.radio_button :role, 'donor' %> 
+<%= f.submit "Select Role" %>
+<% end %>
+
+
+

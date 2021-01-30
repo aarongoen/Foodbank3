@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   resources :requests
 
-  resources :identities
+  resources :users, only: [:edit, :update, :show]
   
   resources :requesters do
     resources :requests
@@ -21,10 +21,10 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#login'
   post '/login', to: 'sessions#create'
 
-  get '/auth/:provider', to: 'sessions#omni_create'#, as: 'auth_login'
-  get "/auth/:provider/callback", to: "sessions#omni_create"
-  
- 
+
+  match '/auth/github/callback', to: 'sessions#omnicreate', via: [:get, :post]
+
+  # get '/auth/failure', to: 'sessions#omni_create' 
   
   match '/logout', to: 'sessions#logout', via: [:get, :post]
 
@@ -32,10 +32,12 @@ Rails.application.routes.draw do
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
+  # get '/users/:id/edit', to: 'users#edit'#, as :edit_role
+  post '/users/:id', to: 'users#update'
 
   # Routes for Requests
 
-  get '/requests/fulfill', to: 'requests#fulfill'
-  post '/requests/fulfill', to: 'requests#update'
+  # get '/requests/fulfill', to: 'requestsfulfill'
+  # post '/requests/fulfill', to: 'requests#update'
 
 end

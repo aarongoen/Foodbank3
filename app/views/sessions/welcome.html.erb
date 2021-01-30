@@ -2,4 +2,4 @@
 
 <h3>Please <%= link_to "sign up", signup_path %> or <%= link_to "log in", login_path %>. </h3>
 
-<%= link_to "Log in with Github", '/auth/github' %><br>
+<%= button_to "Log in with Github", "/auth/github", method: :post%><br>

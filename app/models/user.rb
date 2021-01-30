@@ -3,18 +3,18 @@ class User < ApplicationRecord
   #   provider :identity, :fields => [:email]
   # end
   
-  validates :name, 
-      presence: { :message => "Please include a name.", on: :update},
-      uniqueness: { :message => "Username already exisits. Please select a different one."},
-      length: {in: 3..15, :message => "Username should be 3-5 characters long", :allow_blank => true}
+  # validates :name, 
+  #     presence: { :message => "Please include a name.", on: :update},
+  #     uniqueness: { :message => "Username already exisits. Please select a different one."},
+  #     length: {in: 3..15, :message => "Username should be 3-5 characters long", :allow_blank => true}
 
 
-    validates :password, presence: true
-    validates :password, length: { minimum: 6 }
+    # validates :password, presence: true
+    # validates :password, length: { minimum: 6 }
 
-    has_secure_password
+    # has_secure_password
     
-    validates :role, presence: true
+    # validates :role, presence: true
 
     has_one :requester
     has_one :donor
@@ -39,12 +39,14 @@ class User < ApplicationRecord
     # def self.from_omniauth(auth)
     #     find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)
     # end
-    def self.create_with_omniauth(auth)
-      create! do |user|
-        user.uid = auth['raw_info']['id'], 
-        user.name = auth['raw_info']['name'], 
-        user.email = auth['raw_info']['email']
-      end
-    end
+
+    def self.create_by_github(auth)
+      self.create!(name: auth['info']['nickname'], 
+          id: auth['uid']) do |u|
+          user.name = auth['info']['nickname']
+          user.provider = auth['provider']
+          user.password = SecureRandom.hex
+      end 
+  end 
 
 end

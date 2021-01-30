@@ -1,14 +1,21 @@
 <h3>What food request would you like to make?</h3>
 
 <%= form_for @request do |f| %>
-
+<% binding.pry %>
 <%= f.label :name %>
 <%= f.text_field :name%>
 <%= f.label :quantity%>
 <%= f.number_field :quantity%>
 <%= f.label :measurement%>
 <%= f.text_field :measurement%>
-<%= f.hidden_field :requester_id, :value => current_requester.id %>
+    <% if @request.requester_id %>
+        <%= f.hidden_field :requester_id, :value => current_requester.id %>
+    <% elsif @request.donor_id %>
+        <%= f.hidden_field :donor_id, :value => current_donor.id %>
+    <% else %>
+        Are you a donor or requester? Please
+        <% link_to 'select your role', edit_user_path(@request.user_id) %>
+    <% end %>
 <%= f.submit %><br>
 <% end %>
 

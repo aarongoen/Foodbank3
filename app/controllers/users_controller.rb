@@ -34,19 +34,33 @@ class UsersController < ApplicationController
             # binding.pry
             session[:user_id] = @user.id
             # binding.pry
-             if @user.role == "donor"
-                @donor = Donor.create(name: @user.name, user_id: @user.id)
-                redirect_to requests_path(current_donor)
-             else @user.role == "requester"
-                @requester = Requester.create(name: @user.name, user_id: @user.id)
-                redirect_to requests_path(current_requester)
-             end
         else 
-        flash[:alert] = "Name or password not valid."
-           redirect_to signup_url
+            flash[:alert] = "Name or password not valid."
+               redirect_to root_path
+        end
+
+        if @user.role == "donor"
+            @donor = Donor.create(name: @user.name, user_id: @user.id)
+            redirect_to requests_path(current_donor)
+        elsif @user.role == "requester"
+            @requester = Requester.create(name: @user.name, user_id: @user.id)
+            redirect_to requests_path(current_requester)
+        else 
+            @user.role.empty?
+            render 'edit_user_path(@user)'
         end
     end
 
+    def edit
+        @user = User.find(params[:id])
+    end
+
+    def update
+        @user = User.find(params[:id])
+        @user.update(role: params[:user][:role])
+        redirect_to requests_path(@user)
+    end
+ 
     def show
         @user = User.find(params[:id])
     end
@@ -56,4 +70,8 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :password, :role, :email, :provider, :uid)
     end
+
+
 end
+
+
