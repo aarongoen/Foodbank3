@@ -1,19 +1,20 @@
 <%= render "requests/greeting" %>
 <% #binding.pry %>
 <% if current_requester %>
+   <% if current_requester.requests %>
+        <%= render 'requests/show_donations' %>
+    <% else current_requester.requests.empty? %> 
+        <h3> You don't have any requests yet. </h3>
+    <% end %>
     <%= render 'requests/requesters_requests' %>
     <%# <%= link_to 'New Request', new_requester_request_path(current_requester.id) %> %>
-
 
 <% else current_donor %>
     <% if current_donor.requests %>
         <%= render 'requests/show_donations' %>
-        <%= link_to "Requester's needs", 'requests/to_fulfill' %>
-        <%= render 'requests/new_donation' %>
-    <% elsif %> 
-        <%= link_to "Requester's needs", 'requests/to_fulfill' %>
-        <%= render 'requests/new_donation' %>
-    <% else %>
+    <% else current_donor.requests.empty? %> 
         <h3> You don't have any requests yet. </h3>
     <% end %>
+    <%= link_to "Requester's needs", requests_to_fulfill_path %>
+    <%= render 'requests/new_donation' %>
 <% end %>

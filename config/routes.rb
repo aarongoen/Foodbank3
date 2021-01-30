@@ -10,7 +10,7 @@
     resources :requests
   end
   
-  resources :requests
+  resources :requests, except: :show
 
   resources :users, only: [:edit, :update, :show]
   

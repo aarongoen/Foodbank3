@@ -25,12 +25,12 @@ class RequestsController < ApplicationController
     
     def index
         # binding.pry
-        @requests = Request.outstanding?
         
         if current_requester
             @requests = current_requester.requests
         elsif current_donor
             @donations = current_donor.requests
+            @requests = Request.outstanding
         else
             redirect_to new_request_path
         end
@@ -64,7 +64,9 @@ class RequestsController < ApplicationController
     end
 
     def to_fulfill
+        # binding.pry
         @requests = Request.outstanding
+        render '/requests/to_fulfill'
     end
 
     def destroy
