@@ -1,6 +1,6 @@
    <h3>Here are the requesters' needs:</h3>
     <% #binding.pry %>
-        <%  Request.all.each do |r|%>
+        <%  @requests.each do |r|%>
         <% #binding.pry%>
         <ol><strong><%= link_to r.name, edit_request_path(r), method: :edit%></strong>: 
         <%= r.quantity %> 

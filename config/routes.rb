@@ -37,7 +37,7 @@
 
   # Routes for Requests
 
-  # get '/requests/fulfill', to: 'requestsfulfill'
+  get '/requests/to_fulfill', to: 'requests#fulfilled?'
   # post '/requests/fulfill', to: 'requests#update'
 
 end

@@ -1,3 +1,4 @@
+<% if current_donor.requests.any? %>
     <h3>Here are your donations:</h3>
     <%# <% binding.pry %> 
         <% current_donor.requests.each do |r|%>
@@ -8,3 +9,6 @@
         <%= link_to 'Edit', edit_donor_request_path(current_donor, r), method: :edit %>
         <%= button_to 'Delete', [current_donor, r], method: :delete, confirm: "Are you sure?" %></ul>
         <% end %>
+<% else %><br>
+    <p>You haven't made any donations.</p>
+<% end %><br>

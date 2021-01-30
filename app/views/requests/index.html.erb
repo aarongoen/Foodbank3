@@ -5,14 +5,15 @@
     <%# <%= link_to 'New Request', new_requester_request_path(current_requester.id) %> %>
 
 
-<% elsif current_donor %>
+<% else current_donor %>
     <% if current_donor.requests %>
         <%= render 'requests/show_donations' %>
-        <%= link_to "Requester's needs", requests/to_fulfill_path %>
+        <%= link_to "Requester's needs", 'requests/to_fulfill' %>
         <%= render 'requests/new_donation' %>
     <% elsif %> 
-        <%= link_to "Requester's needs", requests/to_fulfill_path %>
+        <%= link_to "Requester's needs", 'requests/to_fulfill' %>
         <%= render 'requests/new_donation' %>
     <% else %>
         <h3> You don't have any requests yet. </h3>
+    <% end %>
 <% end %>

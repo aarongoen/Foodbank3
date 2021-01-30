@@ -12,7 +12,7 @@ class User < ApplicationRecord
     # validates :password, presence: true
     # validates :password, length: { minimum: 6 }
 
-    # has_secure_password
+    has_secure_password
     
     # validates :role, presence: true
 

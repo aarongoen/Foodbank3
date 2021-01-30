@@ -25,6 +25,7 @@ class RequestsController < ApplicationController
     
     def index
         # binding.pry
+        @requests = Request.outstanding?
         
         if current_requester
             @requests = current_requester.requests
@@ -62,8 +63,8 @@ class RequestsController < ApplicationController
         end
     end
 
-    def fulfill
-        @requests = Request.all
+    def fulfilled?
+        @requests = Request.all.outstanding?
     end
 
     def destroy
