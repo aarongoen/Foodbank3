@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
-    skip_before_action :verify_authenticity_token, only: :omni_create
+    # skip_before_action :verify_authenticity_token, only: :omni_create
+    # before_action :authentication_required
+    # skip_before_action :authentication_required, only: [:omnicreate, :login, :welcome, :new]
+require 'securerandom'
 
     def login
         # binding.pry
@@ -17,10 +20,11 @@ class SessionsController < ApplicationController
         #     flash[:notice] = params[:message] # if using sinatra-flash or rack-flash
         #     redirect root_path
         #   end
-        @user = User.find_or_create_by(uid: auth['uid']) do |user| 
-                # user.name = auth['info']['nickname']
-                # user.provider = auth['provider']
-                user.uid = auth['uid']
+        @user = User.find_or_create_by(id: auth['uid']) do |user| 
+                user.name = auth['info']['nickname']
+                user.provider = auth['provider']
+                user.id = auth['uid']
+                user.password = SecureRandom.hex(10)
             end
             # binding.pry
                 if @user && @user.save
@@ -67,6 +71,12 @@ class SessionsController < ApplicationController
     # end
 
     private 
+
+    def authentication_required
+        if !logged_in?
+          redirect_to login_path
+        end
+      end
 
     # def omni_create
     #     # binding.pry

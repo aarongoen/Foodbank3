@@ -1,15 +1,15 @@
-<% binding.pry %>
-<% if @requests.empty? %>
-    Currently, you have no requests
+<% if current_requester.requests.empty? %>
+  <h3> You don't have any requests yet. </h3>
 <% else %>
-    <% @requests.each do |r| %>
-    <% #binding.pry%>
-<ul><strong><%= r.name %></strong>:   
+    <% current_requester.requests.each do |r| %>
+    <% #binding.pry %>
+<strong><%= r.name %></strong>:   
             <%= r.quantity %> 
             <%= r.measurement.pluralize %> 
             <% if r.fulfilled %> 
-                    fullfilled</ol>
+                   <ol> fullfilled</ol>
             <% else %>
+                    not-fulfilled
                 <%= link_to 'Edit', edit_requester_request_path(current_requester, r) %>
                 <%= button_to 'Delete', [current_requester, r], method: :delete, confirm: "Are you sure?" %></ul>
             <% end %>

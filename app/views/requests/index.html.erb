@@ -1,11 +1,19 @@
 <%= render "requests/greeting" %>
 <% #binding.pry %>
-<% #if current_requester %>
-    <% render 'requester_requests' %>
-   
-
-
-
-
-<% #end %>
+<% if current_requester %>
+    <%= render 'requests/requester_requests' %>
+    <%= link_to 'New Request', new_requester_request_path(current_requester) %>
+  
+<% elsif current_donor %>
+    <% #binding.pry %>
+    <%= render 'requests/show_donations' %>
+    <%= link_to "Requester's needs", requests_to_fulfill_path(@requests) %>
+    <%= render 'requests/new_donation' %>
+<% elsif current_donor.requests.empty? %> 
+    <h3> You haven't made any donations. </h3>
+    <%= link_to "Requester's needs", requests_to_fulfill_path(@requests) %>
+    <%= render 'requests/new_donation' %>
+<% else %>
+    index error: either no donor nor requester nor requests/(donations)
+<% end %>
 

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 helper_method [:logged_in?, :current_user, :current_requester, :current_donor, :current_person]
 # protect_from_forgery with: :exception
 # before_action :authentication_required
-#   skip_before_action :authentication_required, only: [:welcome, :login, :signup, :create, :new]
+#   skip_before_action :authentication_required, only: [:welcome, :login, :signup, :create, :new, :omnicreate]
 
 private
 

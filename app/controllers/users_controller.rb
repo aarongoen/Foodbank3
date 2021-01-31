@@ -28,26 +28,22 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         #binding.pry
-        if @user.valid?
-            # binding.pry
+        if @user.valid? && @user.role == "donor"
             @user.save
-            # binding.pry
-            session[:user_id] = @user.id
-            # binding.pry
-        else 
-            flash[:alert] = "Name or password not valid."
-               redirect_to root_path
-        end
-
-        if @user.role == "donor"
             @donor = Donor.create(name: @user.name, user_id: @user.id)
-            redirect_to requests_path(current_donor)
-        elsif @user.role == "requester"
+            session[:user_id] = @user.id
+            binding.pry
+            redirect_to requests_path(@user)
+        elsif 
+            # binding.pry
+            @user.valid? && @user.role == "requester"
+            @user.save
             @requester = Requester.create(name: @user.name, user_id: @user.id)
+            session[:user_id] = @user.id
             redirect_to requests_path(current_requester)
-        else 
-            @user.role.empty?
-            render 'edit_user_path(@user)'
+        else
+            flash[:alert] = "Name or password not valid."
+            redirect_to signup_path
         end
     end
 

@@ -3,22 +3,19 @@ class User < ApplicationRecord
   #   provider :identity, :fields => [:email]
   # end
   
-  # validates :name, 
-  #     presence: { :message => "Please include a name.", on: :update},
-  #     uniqueness: { :message => "Username already exisits. Please select a different one."},
-  #     length: {in: 3..15, :message => "Username should be 3-5 characters long", :allow_blank => true}
+  validates :name, 
+      presence: { :message => "Please include a name."},#, on: :update},
+      uniqueness: { :message => "Username already exists. Please select a different one."},
+      length: {in: 3..15, :message => "Username should be 3-15 characters long", :allow_blank => false}
 
 
-    # validates :password, presence: true
-    # validates :password, length: { minimum: 6 }
+  validates :password, 
+      presence: true
 
-    has_secure_password
+  has_secure_password
     
-    # validates :role, presence: true
-
-    has_one :requester
-    has_one :donor
-    has_one :identity
+  has_one :requester
+  has_one :donor
 
     # def self.find_or_create_from_auth_hash(auth)
     #     @user = User.find_by(name: auth_hash.uid)

@@ -9,13 +9,13 @@ class RequestsController < ApplicationController
         # binding.pry
         if request_params[:donor_id]
             @request = Request.create(request_params)
-            redirect_to donor_requests_path(current_person, @request)
+            redirect_to requests_show_donations_path(current_person)
         elsif request_params[:requester_id]
             @request = Request.create(request_params)
             redirect_to requester_requests_path(current_person)#, @request)
         else
             "ruh-roh"
-            redirect_to donor_requests_path(current_person)
+            # redirect_to donor_requests_path(current_person)
         end
     end
         
@@ -30,12 +30,12 @@ class RequestsController < ApplicationController
             # binding.pry
             @requests = current_requester.requests.all
             #redirect_to requester_requests_path(current_requester.id)
-        elsif current_donor && current_donor.requests.any?
+        elsif current_donor
             @donations = current_donor.requests
             @requests = Request.outstanding
-            binding.pry
+            #binding.pry
         else
-            redirect_to new_request_path
+            "Sorry we can't find requests or donations for you."
         end
     end
 

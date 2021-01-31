@@ -1,12 +1,16 @@
  Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-    # Routes for Requests
+  # Routes for Requests
 
   get '/requests/to_fulfill', to: 'requests#to_fulfill'
   post '/requests/fulfill', to: 'requests#update'
   get '/requests/show_donations', to: 'requests#index'
+  post '/requests/show_donations', to: 'requests#create'
+
   get '/requests/requester_requests', to: 'requests#index'
+  get '/requests/new_donation', to: 'requests#index'
+  post '/requests/new_donation', to: 'requests#create'
 
   resources :donors do
     resources :requests

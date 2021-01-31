@@ -26,6 +26,7 @@ gem 'omniauth', '~>1.9'
 gem 'omniauth-github'
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
+gem 'securerandom'
 
 
 # Use Active Storage variant

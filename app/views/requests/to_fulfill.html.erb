@@ -4,7 +4,7 @@
     <% #binding.pry %>
         <%  @requests.each do |r|%>
         <% #binding.pry%>
-        <ol><strong><%= link_to r.name, edit_request_path(r), method: :edit%></strong>: 
+        <ol><strong><%= r.name %></strong>: 
         <%= r.quantity %> 
         <%= r.measurement.pluralize %> 
         <% if r.fulfilled? %> 

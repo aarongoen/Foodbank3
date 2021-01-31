@@ -1,13 +1,20 @@
 <h1>Edit your donation here:</h1>
 <% #binding.pry %>
     <%# <%= render 'requests/form', request: @request %> 
-    <% if @request.requester_id %>
+    <% if @request.id %>
     <% #binding.pry %>
         <%= @request.name %>:
         <%= @request.measurement %>
         <%= @request.quantity %>
 
+        <%= form_for @request do |f| %>
+            <%= f.label(:fulfilled, "fulfill this request") %>
+            <%= f.check_box(:fulfilled) %>
+            <%= f.hidden_field :donor_id, value: current_person.id %>
 
+            <%= f.submit %><br>
+            <% end %>
+    
     <% else %>
 
         <%= form_for @request do |f| %>

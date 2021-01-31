@@ -1,4 +1,10 @@
-<h1>Create your account:</h1>
+<% flash.each do |type, alert| %>
+  <div>
+    <%= alert %>
+  </div>
+  <% end %>
+  
+  <h1>Create your account:</h1>
 
 <% #binding.pry %>
 <%= form_for(@user, url: "/signup") do |f| %>
