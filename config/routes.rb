@@ -9,7 +9,7 @@
   post '/requests/show_donations', to: 'requests#create'
 
   get '/requests/requester_requests', to: 'requests#index'
-  get '/requests/new_donation', to: 'requests#index'
+  get '/requests/new_donation', to: 'requests#new'
   post '/requests/new_donation', to: 'requests#create'
 
   resources :donors do
@@ -18,7 +18,7 @@
   
   resources :requests, except: :show
 
-  resources :users, only: [:edit, :update, :show]
+  resources :users, only: [:new, :create, :edit, :update, :show]
   
   resources :requesters do
     resources :requests

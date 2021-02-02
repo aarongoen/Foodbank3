@@ -9,11 +9,7 @@
     <%= render 'requests/show_donations' %>
     <%= link_to "Requester's needs", requests_to_fulfill_path(@requests) %>
     <%= render 'requests/new_donation' %>
-<% elsif current_donor.requests.empty? %> 
-    <h3> You haven't made any donations. </h3>
-    <%= link_to "Requester's needs", requests_to_fulfill_path(@requests) %>
-    <%= render 'requests/new_donation' %>
 <% else %>
-    index error: either no donor nor requester nor requests/(donations)
+    <%= flash[:error] %>
 <% end %>
 

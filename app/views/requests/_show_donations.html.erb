@@ -1,11 +1,13 @@
+<% #binding.pry %>
+
 <% if @donations.empty? %>
-  <h3> You don't have any donations yet. </h3>
-    <%= link_to 'Donate', 'requests/new_donation' %>
+  <h3> You haven't made any donations yet. </h3>
+    <%= link_to 'Donate', new_donor_request_path(current_donor) %>
 <% else %>
 
 <h3>Here are your donations:</h3>
    
-    <% current_donor.requests.each do |r|%>
+    <% @donations.each do |r|%>
     <% #binding.pry %>
     <ul><strong><%= link_to r.name, edit_donor_request_path(current_donor, r), method: :edit%></strong>: 
     <%= r.quantity %> 

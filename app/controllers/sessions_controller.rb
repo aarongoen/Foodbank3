@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    # skip_before_action :verify_authenticity_token, only: :omni_create
+    skip_before_action :verify_authenticity_token, only: :omni_create
     # before_action :authentication_required
     # skip_before_action :authentication_required, only: [:omnicreate, :login, :welcome, :new]
 require 'securerandom'
@@ -20,18 +20,23 @@ require 'securerandom'
         #     flash[:notice] = params[:message] # if using sinatra-flash or rack-flash
         #     redirect root_path
         #   end
-        @user = User.find_or_create_by(id: auth['uid']) do |user| 
+        @user = User.find_or_create_by(uid: auth['uid']) do |user| 
                 user.name = auth['info']['nickname']
                 user.provider = auth['provider']
-                user.id = auth['uid']
-                user.password = SecureRandom.hex(10)
+                user.uid = auth['uid']
+                user.password = 'something secure in the future'
             end
             # binding.pry
-                if @user && @user.save
+                if @user && @user.save(validate: false)
                     # binding.pry
                     session[:user_id] = @user.id
                     # binding.pry
-                    redirect_to edit_user_path(@user)
+                    if @user.role.nil?
+                        # binding.pry
+                        redirect_to edit_user_path(@user)
+                    else
+                        redirect_to requests_path(current_person)
+                    end
                 else 
                     # binding.pry
                     redirect_to root_path
@@ -62,15 +67,16 @@ require 'securerandom'
         redirect_to root_url, alert: "Authentication failed, please try again."
     end
 
-    def user_params
-        params.require(:user).permit(:name, :password)
-    end
 
     # def from_omniauth?
     #     :provider && :uid
     # end
 
     private 
+
+    def user_params
+        params.require(:user).permit(:name, :password, :provider, :uid)
+    end
 
     def authentication_required
         if !logged_in?

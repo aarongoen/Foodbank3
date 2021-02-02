@@ -1,7 +1,7 @@
 <h1>Edit your donation here:</h1>
 <% #binding.pry %>
     <%# <%= render 'requests/form', request: @request %> 
-    <% if @request.id %>
+    <% if @request.requester_id %>
     <% #binding.pry %>
         <%= @request.name %>:
         <%= @request.measurement %>
@@ -30,7 +30,7 @@
 
         <%= f.submit %><br>
     <% end %>
-<%= link_to 'Back', donor_requests_path(current_donor) %>
+<%= link_to 'Back', requests_show_donations_path(current_donor) %>
 <% end %>
 
 

@@ -20,22 +20,24 @@ class RequestsController < ApplicationController
     end
         
     def show
+        # binding.pry
         @request = Request.find_by(id: params[:id])
     end
     
     def index
-        #  binding.pry
-        
-        if current_requester && current_requester.requests.any?
-            # binding.pry
-            @requests = current_requester.requests.all
-            #redirect_to requester_requests_path(current_requester.id)
+        if current_requester
+            @requester = Requester.find_by(user_id: current_requester.user_id)
+            @requests = @requester.requests
+            # redirect_to requester_requests_path(current_requester)
         elsif current_donor
-            @donations = current_donor.requests
+            # binding.pry
+            @donor = Donor.find_by(user_id: current_donor.user_id)
+            @donations = @donor.requests
             @requests = Request.outstanding
-            #binding.pry
+# binding.pry
+            # redirect_to donor_requests_path(@donor)
         else
-            "Sorry we can't find requests or donations for you."
+            flash[:error] = "Sorry, we can't find requests or donations for you."
         end
     end
 
@@ -57,18 +59,20 @@ class RequestsController < ApplicationController
         # binding.pry
         if current_requester
             @request.update(request_params)
+            # binding.pry
             redirect_to requester_request_path(@request)
         elsif current_donor
             @request.update(request_params)
             redirect_to donor_request_path(@request)
         else
-            render 'edit'
+           not updated
         end
     end
 
     def to_fulfill
         # binding.pry
         @requests = Request.outstanding
+
         render '/requests/to_fulfill'
     end
 

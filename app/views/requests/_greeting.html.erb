@@ -1,6 +1,7 @@
-<h2>Hello, 
-    <% if current_donor %>
-        <%= current_donor.name %> 
-    <% else %>
-        <%= current_requester.name %> ! </h2>
+<h2> <% if current_donor %>
+       Hello, <%= current_donor.name %>!
+    <% elsif current_requester %>
+        Hello, <%= current_requester.name %>!
+        <% else %>
+        We don't have your name. </h2>
     <% end %>

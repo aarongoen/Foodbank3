@@ -1,4 +1,11 @@
-<h3>What food request would you like to make?</h3>
+<% if current_requester %>
+    <h3>What food request would you like to make?</h3>
+<% elsif current_donor %>
+    <h3>What would you like to donate?</h3>
+<% else %>
+    request/donation greeting error
+<% end %>
+
 
 <%= form_for @request do |f| %>
 <% #binding.pry %>
@@ -8,7 +15,14 @@
 <%= f.number_field :quantity%>
 <%= f.label :measurement%>
 <%= f.text_field :measurement%>
-<%= f.hidden_field :requester_id, :value => current_requester.id %>
+<% if current_requester %>
+    <%= f.hidden_field :requester_id, :value => current_requester.id %>
+<% elsif current_donor %>
+    <%= f.hidden_field :donor_id, :value => current_donor.id %>
+    <%= f.hidden_field :fulfilled, :value => true %>
+<% else %>
+    role setter error
+<% end %>
 <%= f.submit %><br>
 <% end %>
 

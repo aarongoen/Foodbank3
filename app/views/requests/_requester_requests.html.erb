@@ -1,7 +1,9 @@
-<% if current_requester.requests.empty? %>
+<br>
+<% if @requests.empty? %>
   <h3> You don't have any requests yet. </h3>
 <% else %>
-    <% current_requester.requests.each do |r| %>
+<p>Here are your current requests:</p><br>
+    <% @requests.each do |r| %>
     <% #binding.pry %>
 <strong><%= r.name %></strong>:   
             <%= r.quantity %> 

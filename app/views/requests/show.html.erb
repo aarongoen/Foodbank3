@@ -10,21 +10,24 @@
 <% #binding.pry %>
 
 <% if @donor_request = @request.donor_id %>
-<%= link_to 'Edit', edit_donor_request_path(current_person, @request) %>
-<% elsif @requester_request = @request.requester_id %>
-<%= link_to 'Edit', edit_requester_request_path(current_person, @request) %>
-<% else %>
-    edit form error
-<% end %>
+    <%= link_to 'Edit', edit_donor_request_path(current_person, @request) %>
+    <%= button_to 'Delete', donor_request_path(@request), :method => :delete %>
 
-<% if @donor_request = @request.donor_id %>
-<%= button_to 'Delete', donor_request_path(@request), :method => :delete %>
 <% elsif @requester_request = @request.requester_id %>
-<%= button_to 'Delete', requester_request_path(@request), :method => :delete %>
+    <%= link_to 'Edit', edit_requester_request_path(current_person, @request) %>
+    <%= button_to 'Delete', requester_request_path(@request), :method => :delete %>
+
 <% else %>
-    edit form delete button error
+    edit form or delete button error
 <% end %>
 
 <br>
-<%= link_to 'Back', donor_requests_path(current_person, @request) %>
+<% if current_donor %>
+    <%= link_to 'Back', donor_requests_path(current_donor, @request) %>
+<% elsif current_requester %>
+    <%= link_to 'Back', requester_requests_path(current_requester) %>
+<% else %>
+    back button error
+<% end %>
+
 

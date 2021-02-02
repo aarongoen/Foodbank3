@@ -20,7 +20,9 @@ private
   end
   
   def current_person
-    if current_requester
+    if current_user
+      current_person = current_user
+    elsif current_requester
       current_person = current_requester
     elsif current_donor
       current_person = current_donor
