@@ -1,3 +1,4 @@
+<% binding.pry %>
 <p><%= form_for(current_donor, url: '/donors') do |f|%>
     <%= f.label :donor %><br />
     <%= f.select :donor, Donor.find_by(:name).collect {|r|

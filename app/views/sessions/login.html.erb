@@ -1,5 +1,8 @@
-
-<h1>Log in</h1>
+<% flash.each do |type, error| %>
+  <div>
+    <%= alert %>
+  </div>
+  <% end %><h1>Log in</h1>
 
 <%= form_tag('/login') do %>
 Name: <%= text_field_tag :name %><br>

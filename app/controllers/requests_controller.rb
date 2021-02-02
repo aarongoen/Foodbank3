@@ -60,12 +60,12 @@ class RequestsController < ApplicationController
         if current_requester
             @request.update(request_params)
             # binding.pry
-            redirect_to requester_request_path(@request)
+            redirect_to requester_requests_path(current_requester)
         elsif current_donor
-            @request.update(request_params)
+            @request.update_attributes(request_params)
             redirect_to donor_request_path(@request)
         else
-           not updated
+           "not updated"
         end
     end
 

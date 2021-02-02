@@ -25,9 +25,9 @@
 <% if current_donor %>
     <%= link_to 'Back', donor_requests_path(current_donor, @request) %>
 <% elsif current_requester %>
-    <%= link_to 'Back', requester_requests_path(current_requester) %>
+    <%= link_to 'Back', requester_requests_path(current_requester, @request) %>
 <% else %>
     back button error
-<% end %>
+ <% end %>
 
 
