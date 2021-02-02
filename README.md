@@ -1,24 +1,12 @@
-# README
+# Foodbank3
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Foodbank3 is an app that helps people in need of food place requests which donors can fulfill. 
 
-Things you may want to cover:
+To install and start the app run:
+    git clone
+    bundle install
+    rails db:migrate
+    rail s
+Then open the browser and redirect to 'http://localhost:3000'
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
